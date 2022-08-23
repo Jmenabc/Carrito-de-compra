@@ -12,8 +12,6 @@ import reducer from './reducers/shopReducer';
 
 const App = () => {
 
-  const [carrito, changeCarrito] = useState([]);
-
   const addProductToCarrito = (productId, productName) => {
     //SI el carrito no tiene elementos entonces agregamos uno
     if (carrito.length === 0) {
@@ -72,7 +70,7 @@ const App = () => {
           </Routes>
         </main>
         <aside>
-          <Carrito carrito={carrito} />
+          <Carrito />
         </aside>
       </Container>
     </Provider>

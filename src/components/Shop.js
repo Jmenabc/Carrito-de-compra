@@ -1,12 +1,11 @@
 import React from 'react';
 import Products from './Products';
 
-const Shop = ({ products, addProductToCarrito }) => {
+const Shop = ({ addProductToCarrito }) => {
     return (
         <div>
             <h1>Tienda</h1>
             <Products
-                products={products}
                 addProductToCarrito={addProductToCarrito}
             />
         </div>

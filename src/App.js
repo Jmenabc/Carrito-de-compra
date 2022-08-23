@@ -6,14 +6,11 @@ import Shop from './components/Shop';
 import Blog from './components/Blog';
 import Error404 from './components/Error404';
 import Carrito from './components/Carrito';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import reducer from './reducers/shopReducer';
 
 const App = () => {
-  const products = [
-    { id: 1, name: 'Product 1' },
-    { id: 2, name: 'Product 2' },
-    { id: 3, name: 'Product 3' },
-    { id: 4, name: 'Product 4' }
-  ];
 
   const [carrito, changeCarrito] = useState([]);
 
@@ -51,31 +48,35 @@ const App = () => {
       changeCarrito(newCarrito);
     }
   }
+  //EL reducer es una funcion que edita nuestro estado global
+  const store = createStore(reducer);
 
   return (
-    <Container>
-      <Menu>
-        <NavLink to={'/'}>Inicio</NavLink>
-        <NavLink to={'/Blog'}>Blog</NavLink>
-        <NavLink to={'/Tienda'}>Tienda</NavLink>
-      </Menu>
+    <Provider store={store}>
+      <Container>
+        <Menu>
+          <NavLink to={'/'}>Inicio</NavLink>
+          <NavLink to={'/Blog'}>Blog</NavLink>
+          <NavLink to={'/Tienda'}>Tienda</NavLink>
+        </Menu>
 
-      <main>
-        <Routes>
-          <Route path="*" element={<Error404 />} />
-          <Route path='/' element={<Init />} />
-          <Route path='/Blog' element={<Blog />} />
-          <Route path='/Tienda' element={<Shop
-            products={products}
-            addProductToCarrito={addProductToCarrito}
-          />
-          } />
-        </Routes>
-      </main>
-      <aside>
-        <Carrito carrito={carrito} />
-      </aside>
-    </Container>
+        <main>
+          <Routes>
+            <Route path="*" element={<Error404 />} />
+            <Route path='/' element={<Init />} />
+            <Route path='/Blog' element={<Blog />} />
+            <Route path='/Tienda' element={<Shop
+              addProductToCarrito={addProductToCarrito}
+            />
+            } />
+          </Routes>
+        </main>
+        <aside>
+          <Carrito carrito={carrito} />
+        </aside>
+      </Container>
+    </Provider>
+
   );
 }
 

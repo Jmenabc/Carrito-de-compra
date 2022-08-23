@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 const Products = ({ products, addProductToCarrito }) => {
 
@@ -12,7 +13,7 @@ const Products = ({ products, addProductToCarrito }) => {
                         <Producto key={index}>
                             <p>{products.name}</p>
                             <Boton
-                                onClick={() => addProductToCarrito(products.id , products.name)}
+                                onClick={() => addProductToCarrito(products.id, products.name)}
                             >
                                 Añadir al Carrito
                             </Boton>
@@ -63,4 +64,10 @@ const Boton = styled.button`
     }
 `;
 
-export default Products;
+const mapStateToProps = (status) => {
+    return {
+        products: status.products
+    }
+}
+
+export default connect(mapStateToProps)(Products);

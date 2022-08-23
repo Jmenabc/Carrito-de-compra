@@ -1,28 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Products = () => {
-    const products = [
-        {
-            id: 1,
-            name: 'Product 1'
-        },
-
-        {
-            id: 2,
-            name: 'Product 2'
-        },
-
-        {
-            id: 3,
-            name: 'Product 3'
-        },
-
-        {
-            id: 4,
-            name: 'Product 4'
-        }
-    ];
+const Products = ({products}) => {
 
     return (
         <div>
@@ -30,8 +9,9 @@ const Products = () => {
             <ContenedorProductos>
                 {products.map((products, index) => {
                     return(
-                        <Producto>
+                        <Producto key={index}>
                             <p>{products.name}</p>
+                            <Boton>Añadir al Carrito</Boton>
                         </Producto>
                     );
                 })}

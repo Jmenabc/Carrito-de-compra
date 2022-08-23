@@ -5,8 +5,31 @@ import Init from './components/Init';
 import Shop from './components/Shop';
 import Blog from './components/Blog';
 import Error404 from './components/Error404';
+import Carrito from './components/Carrito';
 
 const App = () => {
+  const products = [
+    {
+      id: 1,
+      name: 'Product 1'
+    },
+
+    {
+      id: 2,
+      name: 'Product 2'
+    },
+
+    {
+      id: 3,
+      name: 'Product 3'
+    },
+
+    {
+      id: 4,
+      name: 'Product 4'
+    }
+  ];
+
   return (
     <Container>
       <Menu>
@@ -20,11 +43,11 @@ const App = () => {
           <Route path="*" element={<Error404 />} />
           <Route path='/' element={<Init />} />
           <Route path='/Blog' element={<Blog />} />
-          <Route path='/Tienda' element={<Shop />} />
+          <Route path='/Tienda' element={<Shop products={products}/>} />
         </Routes>
       </main>
       <aside>
-        <h3>Side bar</h3>
+        <Carrito />
       </aside>
     </Container>
   );

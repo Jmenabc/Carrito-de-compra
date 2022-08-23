@@ -11,9 +11,17 @@ const initialStatus = {
 
 
 
-
+//Reducer es el encargado de administrar el estado global de nuestra app (es una funcion)
 const reducer = (status = initialStatus, action) => {
-    return status;
+    switch (action.type) {
+        case 'AGREGAR_PRODUCTO_AL_CARRITO':
+            console.log('aaaaaa');
+            break;
+        default:
+            return status;
+    }
 }
+
+
 
 export default reducer;

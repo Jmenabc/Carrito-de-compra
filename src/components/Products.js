@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 
 const Products = ({ products, addProductToCarrito }) => {
-
     return (
         <div>
             <h3>Productos</h3>
@@ -70,4 +69,16 @@ const mapStateToProps = (status) => {
     }
 }
 
-export default connect(mapStateToProps)(Products);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addProductToCarrito: (idProductToadd, productName) => {
+            dispatch({
+                type: 'AGREGAR_PRODUCTO_AL_CARRITO',
+                idProductToadd: idProductToadd,
+                productName: productName
+            });
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Products);

@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { NavLink, Switch, Route } from 'react-router-dom';
+import { NavLink, Routes, Route } from 'react-router-dom';
 import Init from './components/Init';
 import Shop from './components/Shop';
 import Blog from './components/Blog';
+import Error404 from './components/Error404';
 
 const App = () => {
   return (
@@ -15,12 +16,16 @@ const App = () => {
       </Menu>
 
       <main>
-        <Switch>
-          <Route path='/' component={Init}/>
-          <Route path='/Blog' component={Blog}/>
-          <Route path='/Tienda' component={Shop}/>
-        </Switch>
+        <Routes>
+          <Route path="*" element={<Error404 />} />
+          <Route path='/' element={<Init />} />
+          <Route path='/Blog' element={<Blog />} />
+          <Route path='/Tienda' element={<Shop />} />
+        </Routes>
       </main>
+      <aside>
+        <h3>Side bar</h3>
+      </aside>
     </Container>
   );
 }

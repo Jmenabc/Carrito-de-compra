@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { NavLink, Routes, Route } from 'react-router-dom';
 import Init from './components/Init';
@@ -9,26 +9,13 @@ import Carrito from './components/Carrito';
 
 const App = () => {
   const products = [
-    {
-      id: 1,
-      name: 'Product 1'
-    },
-
-    {
-      id: 2,
-      name: 'Product 2'
-    },
-
-    {
-      id: 3,
-      name: 'Product 3'
-    },
-
-    {
-      id: 4,
-      name: 'Product 4'
-    }
+    { id: 1, name: 'Product 1' },
+    { id: 2, name: 'Product 2' },
+    { id: 3, name: 'Product 3' },
+    { id: 4, name: 'Product 4' }
   ];
+
+  const [carrito, changeCarrito] = useState([]);
 
   return (
     <Container>
@@ -43,11 +30,11 @@ const App = () => {
           <Route path="*" element={<Error404 />} />
           <Route path='/' element={<Init />} />
           <Route path='/Blog' element={<Blog />} />
-          <Route path='/Tienda' element={<Shop products={products}/>} />
+          <Route path='/Tienda' element={<Shop products={products} />} />
         </Routes>
       </main>
       <aside>
-        <Carrito />
+        <Carrito carrito={carrito}/>
       </aside>
     </Container>
   );

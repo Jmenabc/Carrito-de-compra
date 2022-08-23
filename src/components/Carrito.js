@@ -1,12 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
-const Carrito = () => {
-    const [carrito, changeCarrito] = useState([
-        { id: 1, cuantity: 2, name: 'Product 1' },
-        { id: 2, cuantity: 1, name: 'Product 2' },
-        { id: 3, cuantity: 5, name: 'Product 3' },
-    ]);
+const Carrito = ({carrito}) => {
 
     return (
         <div>

@@ -1,17 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Products = ({products}) => {
+const Products = ({ products, addProductToCarrito }) => {
 
     return (
         <div>
             <h3>Productos</h3>
             <ContenedorProductos>
                 {products.map((products, index) => {
-                    return(
+                    return (
                         <Producto key={index}>
                             <p>{products.name}</p>
-                            <Boton>Añadir al Carrito</Boton>
+                            <Boton
+                                onClick={() => addProductToCarrito(products.id , products.name)}
+                            >
+                                Añadir al Carrito
+                            </Boton>
                         </Producto>
                     );
                 })}

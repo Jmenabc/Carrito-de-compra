@@ -17,6 +17,41 @@ const App = () => {
 
   const [carrito, changeCarrito] = useState([]);
 
+  const addProductToCarrito = (productId, productName) => {
+    //SI el carrito no tiene elementos entonces agregamos uno
+    if (carrito.length === 0) {
+      changeCarrito([{ id: productId, name: productName, cuantity: 1 }]);
+    } else {
+      //Hay que comprtobar que el carrito no tenga ya elñ producto quer queremos agregar
+      //Si lo tiene actualizamos el valor
+      //Si no tiene el producto con el id lo agregamos
+
+      //Para poder editarlo tenemos que clonarlo
+      const newCarrito = [...carrito];
+
+      //Comprobamos si el carrito tiene el id del mproducto a agregar
+      const productInCarrito = newCarrito.filter((productCarrito) => {
+        return productCarrito.id === productId
+      }).length > 0;
+
+      //Si ya tiene el producto lo tenemos que actualizarlo
+      if (productInCarrito) {
+        //Hay que buscarlo y localizar su posicion en el array
+        //Y actualizar su valor en base a eso
+        newCarrito.forEach((product, index) => {
+          if (product.id === productId) {
+            const cuantity = newCarrito[index].cuantity;
+            newCarrito[index] = { id: productId, name: productName, cuantity: cuantity + 1 }
+          }
+        });
+      } else {
+        newCarrito.push({ id: productId, name: productName, cuantity: 1 });
+      }
+      //Actualizamos el carrito
+      changeCarrito(newCarrito);
+    }
+  }
+
   return (
     <Container>
       <Menu>
@@ -30,11 +65,15 @@ const App = () => {
           <Route path="*" element={<Error404 />} />
           <Route path='/' element={<Init />} />
           <Route path='/Blog' element={<Blog />} />
-          <Route path='/Tienda' element={<Shop products={products} />} />
+          <Route path='/Tienda' element={<Shop
+            products={products}
+            addProductToCarrito={addProductToCarrito}
+          />
+          } />
         </Routes>
       </main>
       <aside>
-        <Carrito carrito={carrito}/>
+        <Carrito carrito={carrito} />
       </aside>
     </Container>
   );
